@@ -1,15 +1,17 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{betterrefs}[2020/05/08]
 \RequirePackage{xcolor}
+\RequirePackage[T1]{fontenc}
+
 
 \definecolor{darkgreen}{rgb}{0,0.5,0}
 \let\oldref\ref
-\newcommand{\badref}[1]{\textcolor{red}{\bf[\underline{#1}]}}
-\newcommand{\goodref}[1]{\oldref{#1}\textcolor{darkgreen}{\textbf{[\underline{#1}]}}}
+\newcommand{\badref}[1]{\textcolor{red}{\bf[\underline{\detokenize{#1}}]}}
+\newcommand{\goodref}[1]{\oldref{#1}\textcolor{darkgreen}{\textbf{[\underline{\detokenize{#1}}]}}}
 
 \let\oldlabel\label
 \renewcommand{\label}[1]{
-  \hfill\colorbox{yellow}{\textbf{[\underline{#1}]}}\oldlabel{#1}
+  \hfill\colorbox{yellow}{\textbf{[\underline{\detokenize{#1}}]}}\oldlabel{#1}
   
 }
 
