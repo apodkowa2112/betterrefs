@@ -6,13 +6,17 @@
 
 \definecolor{darkgreen}{rgb}{0,0.5,0}
 \let\oldref\ref
-\newcommand{\badref}[1]{\textcolor{red}{\bf[\underline{\detokenize{#1}}]}}
-\newcommand{\goodref}[1]{\oldref{#1}\textcolor{darkgreen}{\textbf{[\underline{\detokenize{#1}}]}}}
-
-\let\oldlabel\label
-\renewcommand{\label}[1]{
-  \hfill\colorbox{yellow}{\textbf{[\underline{\detokenize{#1}}]}}\oldlabel{#1}
-  
+\newcommand{\badref}[1]{
+%  \sloppy % Let's avoid overfull lines
+  \textcolor{red}{\bf[\underline{\detokenize{#1}}]}
+%  \fussy % Restore to LaTeX default
+}
+\newcommand{\goodref}[1]{
+%  \sloppy % Let's avoid overfull lines
+%  \emergencystretch 1cm
+  \oldref{#1}
+  \textcolor{darkgreen}{\textbf{[\underline{\detokenize{#1}}]}}
+%  \fussy % Return to LaTeX default
 }
 
 %https://tex.stackexchange.com/questions/111311/how-to-make-a-conditional-reference-to-a-text-label
@@ -21,6 +25,14 @@
 %% Replace ?? with missing label name
 %\let\oldref\ref
 \renewcommand{\ref}[1]{\@ifundefined{r@#1}{\badref{#1}}{\goodref{#1}}}
+
+\let\oldlabel\label
+\DeclareOption{label}{
+\renewcommand{\label}[1]{
+  \hfill\colorbox{yellow}{\textbf{[\underline{\detokenize{#1}}]}}\oldlabel{#1}
+  
+}
+}
 
 \DeclareOption{final}{
   \renewcommand{\label}[1]{\oldlabel{#1}}
