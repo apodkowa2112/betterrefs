@@ -1,0 +1,29 @@
+\documentclass{article}
+%\usepackage{xcolor}
+\usepackage{graphicx}% Include figure files
+\usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+\usepackage{betterrefs}
+
+
+\begin{document}
+
+\section{First Section\label{sec:first_sec}}
+This test should trigger an error, as this package does not work with hyperref at this time.
+This is a test. 
+The test is given in Section \ref{sec:first_sec}.
+A missing label is given in Section \ref{sec:missing}.
+The \LaTeX~example image is given in Figures \ref{fig:inner} and \ref{fig:outer}.
+
+Euler's equation is very beautiful, useful, and is given in Equation \ref{eqn:Euler}.
+\begin{align}
+  e^{j\theta} &= \cos\theta+j\sin\theta \label{eqn:Euler}
+\end{align}
+\begin{figure}[b]
+  \centering
+  \includegraphics[width=0.4\linewidth]{example-image}
+  \caption{A figure goes here.\label{fig:inner}}\label{fig:outer}
+\end{figure}
+
+%\redtext{This text is red.}
+\end{document}
